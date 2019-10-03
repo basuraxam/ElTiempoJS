@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+            var vars;
+            var temp_c;
+            var temp_f;
+            
+            // EJEMPLOS --> https://openweathermap.org/current o http://bulk.openweathermap.org/sample/
+            //By city ID
+            //Description: You can call by city ID. API responds with exact result.
+            //List of city ID city.list.json.gz can be downloaded here http://bulk.openweathermap.org/sample/
+
+            // Codigo id = xxxxxxx --> mirar fichero comprimido city.list.json.7z o su web 
+            // Madrid url: "http://api.openweathermap.org/data/2.5/weather?id=3117735&APPID=8d0f7863313e9dc65d823048b2578a9f",
+            // Madrid url: "http://api.openweathermap.org/data/2.5/forecast?id=3117735&APPID=8d0f7863313e9dc65d823048b2578a9f",
+            // Madrid    - id: 3117735 y 6359304
+
+             
+            $.ajax({
+                type: "GET",
+                url: "http://api.openweathermap.org/data/2.5/weather?id=3117735&APPID=8d0f7863313e9dc65d823048b2578a9f",
+                dataType: "json",
+                success: function (data) {
+                    vars = data.main;
+                    //vars.temp --> Temperatura Kelvin
+                    temp_c = vars.temp - 273.15; //Celsius
+                    temp_f = 1.8 * (vars.temp - 273.15) + 32; //Fahrenheit
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        </script>     
+    </body>
+</html>
